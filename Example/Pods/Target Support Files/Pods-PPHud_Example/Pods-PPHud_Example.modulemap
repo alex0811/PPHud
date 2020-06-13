@@ -1,0 +1,6 @@
+module Pods_PPHud_Example {
+  umbrella header "Pods-PPHud_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
