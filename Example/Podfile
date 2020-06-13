@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'PPHud_Example' do
+  pod 'PPHud', :path => '../'
+
+  target 'PPHud_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
