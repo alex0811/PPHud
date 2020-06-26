@@ -111,14 +111,14 @@ public class PPHud: UIView {
     }
     
     // MARK: - Public
-    open class func pp_showHudTo(view: UIView!, animated: Bool) -> PPHud{
+    public class func pp_showHudTo(view: UIView!, animated: Bool) -> PPHud{
         let hud = PPHud()
         view.addSubview(hud)
         hud.showUsingAnimation(animated)
         return hud
     }
     
-    open func hide(animated: Bool) {
+    public func hide(animated: Bool) {
         assert(Thread.isMainThread, "PPHud needs to be accessed on the main thread.")
         if !self.isShowing {
             return
@@ -127,13 +127,13 @@ public class PPHud: UIView {
         self.hideUsingAnimation(animated)
     }
     
-    open func hide(animated: Bool, after: Double) {
+    public func hide(animated: Bool, after: Double) {
         DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + after)) {
             self.hideUsingAnimation(animated)
         }
     }
     
-    open class func pp_hudFor(view: UIView) -> PPHud? {
+    public class func pp_hudFor(view: UIView) -> PPHud? {
         var result: PPHud?
         
         for view in view.subviews {
