@@ -35,30 +35,30 @@
 /* Begin PBXFileReference section */
 		114E8695B20EF36FA5B857BE431D40A8 /* PPHud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PPHud.release.xcconfig; sourceTree = "<group>"; };
 		11AEBB9F4A7C4100CE6ED0E6B25A2FB4 /* Pods-PPHud_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PPHud_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		133ABCEFD729A16F43F0555E39FC7838 /* libPPHud.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libPPHud.a; path = libPPHud.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		133ABCEFD729A16F43F0555E39FC7838 /* libPPHud.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPPHud.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		228BA7837BCBBECDE194C04BEE1FBC44 /* Pods-PPHud_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-PPHud_Example.modulemap"; sourceTree = "<group>"; };
 		27BFC70E1320287EDDDB363CB79EA6B2 /* Pods-PPHud_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PPHud_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		35B6F1A9415226DB9FB8A545664CC322 /* Pods-PPHud_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PPHud_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		37F0A8F6AA78F8E82B22CB6561C1B1EF /* libPods-PPHud_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-PPHud_Tests.a"; path = "libPods-PPHud_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		37F0A8F6AA78F8E82B22CB6561C1B1EF /* libPods-PPHud_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PPHud_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AE6475E004B88426B267E12D9F4797D /* Pods-PPHud_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PPHud_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		42685F7A74BAA00DBE4580030CEE661C /* PPHud-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PPHud-umbrella.h"; sourceTree = "<group>"; };
 		4D67134F4ECB93423D0C9EA03CA233BC /* Pods-PPHud_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PPHud_Example.release.xcconfig"; sourceTree = "<group>"; };
 		50CAB11FC898615D4E265E192BADB7BD /* Pods-PPHud_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PPHud_Example-dummy.m"; sourceTree = "<group>"; };
 		543A83E96608247BDEF140310CEA7943 /* Pods-PPHud_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PPHud_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		7520D65A319C2D44F6519AB444983BBC /* Pods-PPHud_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PPHud_Example-umbrella.h"; sourceTree = "<group>"; };
-		7CF2C7312D383C717E8C7C1C9CEABF2C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		7CF2C7312D383C717E8C7C1C9CEABF2C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		8334C0B640D80A9AB4B35523ACBF3F63 /* PPHud-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PPHud-prefix.pch"; sourceTree = "<group>"; };
 		90C7D58C572F79559CB06B88CF0CECE6 /* Pods-PPHud_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PPHud_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		99B337150768CA209F18C5F119B938D4 /* Pods-PPHud_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PPHud_Tests-dummy.m"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		ABA13F509DC102DF3A706F51732D7C6D /* PPHud.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = PPHud.modulemap; sourceTree = "<group>"; };
 		AECF84521D598C0F0E4ED1C9F219A769 /* PPHud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PPHud.debug.xcconfig; sourceTree = "<group>"; };
-		AF11F7EE095AF35D43D1818ABA0094C9 /* PPHud.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = PPHud.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		AF11F7EE095AF35D43D1818ABA0094C9 /* PPHud.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = PPHud.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B6E96D700C28DF41006497412B92C76C /* PPHud.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PPHud.swift; path = PPHud/Classes/PPHud.swift; sourceTree = "<group>"; };
 		B7279B16800544D940ACC77D678EF220 /* PPHud-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PPHud-dummy.m"; sourceTree = "<group>"; };
-		BC9AD0E106921B86F624F73D5F7A173F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		BC9AD0E106921B86F624F73D5F7A173F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DC32BE738D9A45C70A2BAD5D5270F759 /* Pods-PPHud_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PPHud_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		FC0AA9D05DC99AB6B46C93A5C33531CF /* libPods-PPHud_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-PPHud_Example.a"; path = "libPods-PPHud_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC0AA9D05DC99AB6B46C93A5C33531CF /* libPods-PPHud_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PPHud_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +285,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
 				LastUpgradeCheck = 1100;
+				ORGANIZATIONNAME = "Fan Zhang";
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -639,8 +640,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};

@@ -2,14 +2,11 @@
 //  PPHud.swift
 //  Pods
 //
-//  Created by Holiday on 2020/6/14.
+//  Created by Alex on 2020/8/7.
+//  Copyright © 2020 Fan Zhang. All rights reserved.
 //
 
 import UIKit
-
-let PPDefaultLabelFontSize: CGFloat = 16.0
-let PPDefaultDetailLabelFontSize: CGFloat = 12.0
-let PPDefaultPadding = 4.0
 
 public enum PPHudMode {
     case indeterminate
@@ -28,17 +25,22 @@ public enum PPHudAnimateMode {
 }
 
 public class PPHud: UIView {
+    let PPDefaultLabelFontSize: CGFloat = 16.0
+    let PPDefaultDetailLabelFontSize: CGFloat = 12.0
+    let PPDefaultPadding = 4.0
+    let animationInterval = 0.35
+    var margin = 20.0
+    
+    private var overParentView: UIView?
     var indicator: UIView?
-    public var customView: UIView? {
-        didSet {
-            self.updateIndicators()
-        }
-    }
-    public var backgroundView: PPBackgroundView = PPBackgroundView()
-    var bezelView: PPBackgroundView = PPBackgroundView()
     public var label: UILabel = UILabel()
     public var detailLabel: UILabel = UILabel()
     public var button: UIButton = PPHudRoundButton(type: .custom)
+    public var backgroundView: PPBackgroundView = PPBackgroundView()
+    var bezelView: PPBackgroundView = PPBackgroundView()
+    var isShowing: Bool = false
+    public var animateMode: PPHudAnimateMode = .fade
+    var bezelConstraints = [NSLayoutConstraint]()
     
     public var contentColor: UIColor = UIColor.black {
         willSet {
@@ -48,9 +50,13 @@ public class PPHud: UIView {
             }
         }
     }
-    var isShowing: Bool = false
-    public var animateMode: PPHudAnimateMode = .fade
-    let animationInterval = 0.35
+    
+    public var customView: UIView? {
+        didSet {
+            self.updateIndicators()
+        }
+    }
+    
     public var propress: CGFloat = 0.0 {
         willSet {
             if newValue != self.propress {
@@ -84,10 +90,6 @@ public class PPHud: UIView {
             self.overParentView?.isUserInteractionEnabled = !self.enbaleBackgroundGesture
         }
     }
-    
-    var margin = 20.0
-    var bezelConstraints = [NSLayoutConstraint]()
-    private var overParentView: UIView?
     
     // MARK: - override
     public override func didMoveToSuperview() {
@@ -335,25 +337,6 @@ public class PPHud: UIView {
         
         super.updateConstraints()
     }
-    
-//    private func updateLayerOrderForVisible() {
-//        guard let parentView = self.superview, parentView.isKind(of: UIScrollView.self) else { return }
-//
-//        if self.centerVisibleInScrollView {
-//            if let grandFatherView = parentView.superview {
-//                let overView = UIView.init(frame: parentView.frame)
-//                overView.isUserInteractionEnabled = false
-//                grandFatherView.insertSubview(overView, aboveSubview: parentView)
-//
-//                self.removeFromSuperview()
-//                self.overParentView = overView
-//                overView.addSubview(self)
-//            }
-//        } else {
-//            self.removeFromSuperview()
-//            parentView.addSubview(self)
-//        }
-//    }
     
     // MARK: - Show & Hide
     private func showUsingAnimation(_ animation: Bool) {
