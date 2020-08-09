@@ -1,5 +1,5 @@
 PODS:
-  - PPHud (0.1.0)
+  - PPHud (0.1.1)
 
 DEPENDENCIES:
   - PPHud (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  PPHud: e88ebe5986268c19dba68e780a072ea1bf315c09
+  PPHud: 61488178e5d4b896fd51fcbafe14af273b03228c
 
 PODFILE CHECKSUM: 8d763517ea9048293ce0df0070a8c421c5bff4e2
 

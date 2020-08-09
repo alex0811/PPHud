@@ -1,8 +1,7 @@
 {
   "name": "PPHud",
-  "version": "0.1.0",
-  "summary": "A short description of PPHud.",
-  "description": "TODO: Add long description of the pod here.",
+  "version": "0.1.1",
+  "summary": "A simple Hud",
   "homepage": "https://github.com/alex0811/PPHud",
   "license": {
     "type": "MIT",
@@ -13,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/alex0811/PPHud.git",
-    "tag": "0.1.0"
+    "tag": "0.1.1"
   },
   "platforms": {
     "ios": "10.0"

@@ -13,6 +13,7 @@
 		588C0E0A2D9C6D0398756BD07F5FA433 /* Pods-PPHud_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7520D65A319C2D44F6519AB444983BBC /* Pods-PPHud_Example-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		698D8B2F2B4A62FD03074DFCD33441FA /* PPHud-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B7279B16800544D940ACC77D678EF220 /* PPHud-dummy.m */; };
 		923D63D48CB5E54035AB3F903C78077E /* PPHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E96D700C28DF41006497412B92C76C /* PPHud.swift */; };
+		D8C7445024DD2BB1002D18E9 /* PPHudWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C7444F24DD2BB1002D18E9 /* PPHudWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		B6E96D700C28DF41006497412B92C76C /* PPHud.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PPHud.swift; path = PPHud/Classes/PPHud.swift; sourceTree = "<group>"; };
 		B7279B16800544D940ACC77D678EF220 /* PPHud-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PPHud-dummy.m"; sourceTree = "<group>"; };
 		BC9AD0E106921B86F624F73D5F7A173F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D8C7444F24DD2BB1002D18E9 /* PPHudWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPHudWrapper.swift; sourceTree = "<group>"; };
 		DC32BE738D9A45C70A2BAD5D5270F759 /* Pods-PPHud_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PPHud_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		FC0AA9D05DC99AB6B46C93A5C33531CF /* libPods-PPHud_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PPHud_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				B6E96D700C28DF41006497412B92C76C /* PPHud.swift */,
+				D8C7444F24DD2BB1002D18E9 /* PPHudWrapper.swift */,
 				575B7EBEDED3F31131E730F712DC413A /* Pod */,
 				4BB53E90724DADBB3E172F7761965DB0 /* Support Files */,
 			);
@@ -285,7 +288,6 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
 				LastUpgradeCheck = 1100;
-				ORGANIZATIONNAME = "Fan Zhang";
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -355,6 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8C7445024DD2BB1002D18E9 /* PPHudWrapper.swift in Sources */,
 				698D8B2F2B4A62FD03074DFCD33441FA /* PPHud-dummy.m in Sources */,
 				923D63D48CB5E54035AB3F903C78077E /* PPHud.swift in Sources */,
 			);

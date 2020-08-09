@@ -29,6 +29,7 @@ public class PPHud: UIView {
     let PPDefaultDetailLabelFontSize: CGFloat = 12.0
     let PPDefaultPadding = 4.0
     let animationInterval = 0.35
+    let PPDefaultBackgroundColor = UIColor(white: 0.0, alpha: 0.1)
     var margin = 20.0
     
     private var overParentView: UIView?
@@ -74,6 +75,20 @@ public class PPHud: UIView {
         }
     }
     
+    public var text: String? = "" {
+        didSet {
+            self.label.text = self.text
+            self.updateConstraints()
+        }
+    }
+    
+    public var detail: String? = "" {
+        didSet {
+            self.detailLabel.text = self.detail
+            self.updateConstraints()
+        }
+    }
+    
     public var mode: PPHudMode = .indeterminate {
         willSet {
             if newValue != self.mode {
@@ -91,7 +106,7 @@ public class PPHud: UIView {
         }
     }
     
-    // MARK: - override
+    // MARK: - Override
     public override func didMoveToSuperview() {
         if let parentView = self.superview {
             if parentView.isKind(of: UIScrollView.self) {
@@ -110,43 +125,6 @@ public class PPHud: UIView {
                 self.heightAnchor.constraint(equalTo: parentView.heightAnchor).isActive = true
             }
         }
-    }
-    
-    // MARK: - Public
-    public class func pp_showHudTo(view: UIView!, animated: Bool) -> PPHud{
-        let hud = PPHud()
-        view.addSubview(hud)
-        hud.showUsingAnimation(animated)
-        return hud
-    }
-    
-    public func hide(animated: Bool) {
-        assert(Thread.isMainThread, "PPHud needs to be accessed on the main thread.")
-        if !self.isShowing {
-            return
-        }
-        
-        self.hideUsingAnimation(animated)
-    }
-    
-    public func hide(animated: Bool, after: Double) {
-        DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + after)) {
-            self.hideUsingAnimation(animated)
-        }
-    }
-    
-    public class func pp_hudFor(view: UIView) -> PPHud? {
-        var result: PPHud?
-        
-        for view in view.subviews {
-            if view.isKind(of: PPHud.self) {
-                if (view as! PPHud).isShowing {
-                    result = view as? PPHud
-                }
-            }
-        }
-        
-        return result
     }
     
     // MARK: - Init
@@ -173,7 +151,7 @@ public class PPHud: UIView {
     private func setupViews() {
         self.backgroundView.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundView.style = .solidColor
-        self.backgroundView.color = .clear
+        self.backgroundView.color = self.PPDefaultBackgroundColor
         self.addSubview(self.backgroundView)
         
         self.bezelView.layer.cornerRadius = 5.0
@@ -252,7 +230,7 @@ public class PPHud: UIView {
     private func updateViewForColor() {
         self.label.textColor = self.contentColor
         self.detailLabel.textColor = self.contentColor
-        self.button .setTitleColor(self.contentColor, for: .normal)
+        self.button.setTitleColor(self.contentColor, for: .normal)
         
         if let indicator = self.indicator {
             if indicator.isKind(of: UIActivityIndicatorView.self) {
@@ -417,6 +395,153 @@ public class PPHud: UIView {
             if let overView = self.overParentView { overView.removeFromSuperview() }
             self.removeFromSuperview()
             }}
+    }
+}
+
+// MARK: - Public
+
+extension PPHud {
+    // MARK: Show
+    public class func pp_showHudActivity() -> PPHud? {
+        return self.pp_showHudActivity(nil)
+    }
+    
+    public class func pp_showHudActivity(_ text: String?) -> PPHud? {
+        return self.pp_showHudActivity(text, detail: nil)
+    }
+    
+    public class func pp_showHudActivity(_ text: String?, detail: String?) -> PPHud? {
+        guard let window = UIApplication.shared.delegate?.window else {
+            return nil
+        }
+        
+        let hud = self.pp_showHudTo(view: window, animated: true)
+        hud.mode = .indeterminate
+        hud.label.text = text
+        hud.detailLabel.text = detail
+        return hud
+    }
+    
+    public class func pp_showProgress(_ text: String?, detail: String?) -> PPHud? {
+        return self.pp_showProgress(text, detail: detail, mode: .determinate)
+    }
+    
+    public class func pp_showProgress(_ text: String?,
+                                      detail: String?,
+                                        mode: PPHudMode) -> PPHud? {
+        guard let window = UIApplication.shared.delegate?.window else { return nil }
+        
+        let hud = self.pp_showHudTo(view: window, animated: true)
+        hud.mode = mode
+        hud.text = text
+        hud.detail = detail
+        return hud
+    }
+    
+    public class func pp_show(_ text: String?) -> PPHud? {
+        guard let window = UIApplication.shared.delegate?.window else { return nil }
+        
+        let hud = self.pp_showHudTo(view: window, animated: true)
+        hud.mode = .text
+        hud.text = text
+        hud.hide(animated: true, after: 2.0)
+        return hud
+    }
+    
+    public class func pp_showSuccess(_ text: String?) -> PPHud? {
+        guard let window = UIApplication.shared.delegate?.window else { return nil }
+        
+        let hud = PPHud.pp_showHudTo(view: window, animated: true)
+        hud.mode = .customView
+        
+        let customView = UIImageView.init(frame: CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0))
+        customView.image = UIImage(named: "pp_success")
+        hud.customView = customView
+        hud.label.text = text
+        hud.hide(animated: true, after: 2.0)
+        return hud
+    }
+    
+    public class func pp_showFail(_ text: String?) -> PPHud? {
+        guard let window = UIApplication.shared.delegate?.window else { return nil }
+        
+        let hud = PPHud.pp_showHudTo(view: window, animated: true)
+        hud.mode = .customView
+        
+        let customView = UIImageView.init(frame: CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0))
+        customView.image = UIImage(named: "pp_fail")
+        hud.customView = customView
+        hud.label.text = text
+        hud.hide(animated: true, after: 2.0)
+        return hud
+    }
+    
+    
+    
+    public class func pp_show(_ text: String?,
+                              detail: String?,
+                                mode: PPHudMode,
+                         actionTitle: String?,
+                              target: Any?,
+                              action: Selector) -> PPHud? {
+        guard let hud = PPHud.pp_showProgress(text, detail: detail, mode: mode) else {
+            return nil
+        }
+        
+        if let actionTitle = actionTitle, let target = target {
+            hud.button.setTitle(actionTitle, for: .normal)
+            hud.button.addTarget(target, action: action, for: .touchUpInside)
+        }
+        
+        return hud
+    }
+    
+    // MARK: Base
+    public class func pp_showHudTo(view: UIView!, animated: Bool) -> PPHud{
+        let hud = PPHud()
+        view.addSubview(hud)
+        hud.showUsingAnimation(animated)
+        return hud
+    }
+    
+    // MARK: Hide
+    public func hide() {
+        self.hide(animated: true)
+    }
+    
+    public func hide(animated: Bool) {
+        assert(Thread.isMainThread, "PPHud needs to be accessed on the main thread.")
+        if !self.isShowing {
+            return
+        }
+        
+        self.hideUsingAnimation(animated)
+    }
+    
+    public func hide(animated: Bool, after: Double) {
+        DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + after)) {
+            self.hideUsingAnimation(animated)
+        }
+    }
+    
+    public class func pp_hud() -> PPHud? {
+        guard let window = UIApplication.shared.delegate?.window else { return nil }
+        
+        return self.pp_hudFor(view: window!)
+    }
+    
+    public class func pp_hudFor(view: UIView) -> PPHud? {
+        var result: PPHud?
+        
+        for view in view.subviews {
+            if view.isKind(of: PPHud.self) {
+                if (view as! PPHud).isShowing {
+                    result = view as? PPHud
+                }
+            }
+        }
+        
+        return result
     }
 }
 

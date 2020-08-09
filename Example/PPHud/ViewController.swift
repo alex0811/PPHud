@@ -51,8 +51,7 @@ class ViewController: UIViewController {
                 PPAction(actionTitle: "Colored", actionSel: #selector(ViewController.colordAction)),
             ],
             [
-                PPAction(actionTitle: "Center absolute scrollView ", actionSel: #selector(ViewController.centerAbsoluteScrollViewAction)),
-                PPAction(actionTitle: "Center compare scrollView ", actionSel: #selector(ViewController.centerCompareScrollViewAction)),
+                PPAction(actionTitle: "Center absolute scrollView ", actionSel: #selector(ViewController.centerScrollViewAction)),
             ],
         ]
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
@@ -61,55 +60,57 @@ class ViewController: UIViewController {
 
     // MARK: - Actions
     @objc private func indeterminateModelAction() {
-        let hud = PPHud.pp_showHudTo(view: self.view, animated: true)
+        guard let hud = PPHud.pp_showHudActivity() else {
+            return
+        }
         DispatchQueue.global().async {
             // do your work
             DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + 1.0)) {
-                hud.hide(animated: true)
+                hud.hide()
             }
         }
     }
     
     @objc private func indeterminateWithLabelModeAction() {
-        let hud = PPHud.pp_showHudTo(view: self.view, animated: true)
-        hud.label.text = "Loading..."
+        guard let hud = PPHud.pp_showHudActivity("Loading...") else {
+            return
+        }
         DispatchQueue.global().async {
             // do your work
             DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + 3.0)) {
-                hud.hide(animated: true)
+                hud.hide()
             }
         }
     }
     
     @objc private func indeterminateWithDetailLabelModeAction() {
-        let hud = PPHud.pp_showHudTo(view: self.view, animated: true)
-        hud.label.text = "Loading..."
-        hud.detailLabel.text = "download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...\n(1/3)"
+        guard let hude = PPHud.pp_showHudActivity("Loading...", detail: "download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...\n(1/3)") else {
+            return
+        }
         DispatchQueue.global().async {
             // do your work
             DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + 3.0)) {
-                hud.hide(animated: true)
+                hude.hide()
             }
         }
     }
     
     // MARK: -
     @objc private func determinateModeAction() {
-        let hud = PPHud.pp_showHudTo(view: self.view, animated: true)
-        hud.label.text = "Loading..."
-        hud.mode = .determinate
+        guard let hud = PPHud.pp_showProgress("Loading...", detail: "step(1/10)") else { return }
         
         var progress: CGFloat = 0.0
         let timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { (timer) in
-            progress += 0.1
-            if progress <= 1.0 {
+            progress += 1
+            if progress <= 10 {
                 DispatchQueue.main.async {
-                    hud.propress = progress
+                    hud.propress = progress / 10.0
+                    hud.detail = String(format: "step(%.f/10)", progress)
                 }
             } else {
                 timer.invalidate()
                 DispatchQueue.main.async {
-                    hud.hide(animated: true)
+                    hud.hide()
                 }
             }
         }
@@ -117,9 +118,9 @@ class ViewController: UIViewController {
     }
     
     @objc private func aunularDeterminateModeAction() {
-        let hud = PPHud.pp_showHudTo(view: self.view, animated: true)
-        hud.label.text = "Loading..."
-        hud.mode = .annularDeteminate
+        guard let hud = PPHud.pp_showProgress("Loading...", detail: nil, mode: .annularDeteminate) else {
+            return
+        }
         
         var progress: CGFloat = 0.0
         let timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { (timer) in
@@ -131,7 +132,7 @@ class ViewController: UIViewController {
             } else {
                 timer.invalidate()
                 DispatchQueue.main.async {
-                    hud.hide(animated: true)
+                    hud.hide()
                 }
             }
         }
@@ -139,9 +140,9 @@ class ViewController: UIViewController {
     }
     
     @objc private func barDeterminateModeAction() {
-        let hud = PPHud.pp_showHudTo(view: self.view, animated: true)
-        hud.label.text = "Loading..."
-        hud.mode = .determinateHorizontalBar
+        guard let hud = PPHud.pp_showProgress("Loading...", detail: "soon", mode: .determinateHorizontalBar) else {
+            return
+        }
         
         var progress: CGFloat = 0.0
         let timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { (timer) in
@@ -153,7 +154,7 @@ class ViewController: UIViewController {
             } else {
                 timer.invalidate()
                 DispatchQueue.main.async {
-                    hud.hide(animated: true)
+                    hud.hide()
                 }
             }
         }
@@ -161,30 +162,19 @@ class ViewController: UIViewController {
     }
     
     @objc private func textOnlyModeAction() {
-        let hud = PPHud.pp_showHudTo(view: self.view, animated: true)
-        hud.mode = .text
-        hud.label.text = "Hello PPHud!"
-        hud.hide(animated: true, after: 2.0)
+        let _ = PPHud.pp_show("Hello Swift")
     }
     
     @objc private func customViewModeAction() {
-        let hud = PPHud.pp_showHudTo(view: self.view, animated: true)
-        hud.mode = .customView
-        
-        let customView = UIImageView.init(frame: CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0))
-        customView.image = UIImage(named: "pp_success")
-        hud.customView = customView
-        hud.label.text = "success!"
-        
-        hud.hide(animated: true, after: 2.0)
+        let _ = PPHud.pp_showSuccess("成功")
+//        let _ = PPHud.pp_showFail("出错啦！")
     }
     
     @objc private func actionButtonModeAction() {
-        let hud = PPHud.pp_showHudTo(view: self.view, animated: true)
-        hud.label.text = "Loading..."
-        hud.mode = .determinateHorizontalBar
-        hud.button.setTitle("cancel", for: .normal)
-        hud.button.addTarget(self, action: #selector(ViewController.cancelAction), for: .touchUpInside)
+        guard let hud = PPHud.pp_show("Loading...", detail: nil, mode: .determinateHorizontalBar, actionTitle: "cancel", target: self, action: #selector(ViewController.cancelAction)) else {
+            return
+        }
+
         var progress: CGFloat = 0.0
         let timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { (timer) in
             progress += 0.1
@@ -195,7 +185,7 @@ class ViewController: UIViewController {
             } else {
                 timer.invalidate()
                 DispatchQueue.main.async {
-                    hud.hide(animated: true)
+                    hud.hide()
                 }
             }
         }
@@ -203,13 +193,15 @@ class ViewController: UIViewController {
     }
     
     @objc private func cancelAction() {
-        if let hud = PPHud.pp_hudFor(view: self.view) {
-            hud.hide(animated: true)
+        if let hud = PPHud.pp_hud() {
+            hud.hide()
         }
     }
     
     @objc private func switchingModeAction() {
-        let hud = PPHud.pp_showHudTo(view: self.view, animated: true)
+        guard let hud = PPHud.pp_showHudActivity() else {
+            return
+        }
         hud.label.text = "prepare..."
         hud.mode = .text
         
@@ -227,56 +219,50 @@ class ViewController: UIViewController {
     
     // MARK: -
     @objc private func windowAction() {
-        if let window = UIApplication.shared.delegate?.window {
-            let hud = PPHud.pp_showHudTo(view: window, animated: true)
-            hud.animateMode = .zoomIn
-            hud.mode = .indeterminate
-            hud.backgroundView.style = .solidColor
-            hud.backgroundView.color = UIColor.init(white: 0.0, alpha: 0.1)
-            hud.hide(animated: true, after: 2.0)
+        guard let hud = PPHud.pp_showHudActivity() else {
+            return
         }
+        
+        hud.animateMode = .zoomIn
+        hud.hide(animated: true, after: 2.0)
     }
     
     @objc private func dimBackgrounAction() {
-        let hud = PPHud.pp_showHudTo(view: self.view, animated: true)
+        guard let hud = PPHud.pp_showHudActivity() else {
+            return
+        }
+        
         hud.animateMode = .zoomIn
-        hud.mode = .indeterminate
-        hud.backgroundView.style = .solidColor
-        hud.backgroundView.color = UIColor.init(white: 0.0, alpha: 0.1)
         hud.hide(animated: true, after: 2.0)
     }
     
     @objc private func doBackgrounAction() {
-        let hud = PPHud.pp_showHudTo(view: self.view, animated: true)
-        hud.mode = .indeterminate
-        hud.backgroundView.color = UIColor.init(white: 0.0, alpha: 0.1)
-        hud.hide(animated: true, after: 2.0)
+        guard let hud = PPHud.pp_showHudActivity() else {
+            return
+        }
+        
         hud.enbaleBackgroundGesture = true
+        hud.animateMode = .zoomIn
+        hud.hide(animated: true, after: 2.0)
     }
     
     @objc private func colordAction() {
-        let hud = PPHud.pp_showHudTo(view: self.view, animated: true)
-        hud.animateMode = .zoomIn
-        hud.mode = .indeterminate
-        hud.label.text = "Loading..."
+        guard let hud = PPHud.pp_showHudActivity() else {
+            return
+        }
+        
+        hud.text = "Loading..."
         hud.contentColor = .purple
         hud.hide(animated: true, after: 2.0)
     }
     
     // MARK: -
-    @objc private func centerAbsoluteScrollViewAction() {
+    @objc private func centerScrollViewAction() {
         let hud = PPHud.pp_showHudTo(view: self.tableView, animated: true)
         hud.mode = .indeterminate
         hud.backgroundView.color = UIColor.init(white: 0.0, alpha: 0.1)
         hud.hide(animated: true, after: 2.0)
-    }
-    
-    @objc private func centerCompareScrollViewAction() {
-        let hud = PPHud.pp_showHudTo(view: self.tableView, animated: true)
-        hud.mode = .indeterminate
-        hud.backgroundView.color = UIColor.init(white: 0.0, alpha: 0.1)
         hud.enbaleBackgroundGesture = true
-        hud.hide(animated: true, after: 2.0)
     }
 }
 
