@@ -51,26 +51,21 @@ extension PPHudWrapper where Base == UIView {
         return self.showActivity(text: text, detail: detail, color: nil)
     }
     
-    public func showActivity(text: String?,
-                             detail: String?,
-                             color: UIColor?) -> PPHud? {
-        let hud = PPHud.pp_showHudTo(view: self.base, animated: true)
-        hud.label.text = text
-        hud.detailLabel.text = detail
-        hud.contentColor = color ?? .black
-        return hud
+    public func showActivity(text: String?, detail: String?, color: UIColor?) -> PPHud? {
+        return PPHud.pp_show(text, detail: detail, mode: .indeterminate, customView: nil, actionTitle: nil, target: nil, action: nil)
     }
     
     // MARK: - Determinate
-    public func showProgress(_ text: String) -> PPHud? {
+    public func showProgress(_ text: String?) -> PPHud? {
         return self.showProgress(text: text, mode: .determinate)
     }
     
-    public func showProgress(text: String, mode: PPHudMode) -> PPHud? {
-        let hud = PPHud.pp_showHudTo(view: self.base, animated: true)
-        hud.label.text = text
-        hud.mode = mode
-        return hud
+    public func showProgress(text: String?, mode: PPHudMode) -> PPHud? {
+        return self.showProgress(text: text, detail: nil, mode: mode)
+    }
+    
+    public func showProgress(text: String?, detail: String?, mode: PPHudMode) -> PPHud? {
+        return PPHud.pp_show(text, detail: detail, mode: mode, customView: nil, actionTitle: nil, target: nil, action: nil)
     }
     
     public func showHudAction(text: String,
@@ -78,12 +73,7 @@ extension PPHudWrapper where Base == UIView {
                               actionTile: String,
                               target: Any?,
                               action: Selector) -> PPHud? {
-        let hud = PPHud.pp_showHudTo(view: self.base, animated: true)
-        hud.label.text = text
-        hud.mode = mode
-        hud.button.setTitle(actionTile, for: .normal)
-        hud.button.addTarget(target, action: action, for: .touchUpInside)
-        return hud
+        return PPHud.pp_show(text, detail: nil, mode: mode, customView: nil, actionTitle: actionTile, target: target, action: action)
     }
     
     public func updateProgress(_ progress: CGFloat) -> PPHud? {
@@ -112,15 +102,30 @@ extension PPHudWrapper where Base == UIView {
     
     // MARK: - Custom Image
     public func showSuccess(_ text: String) -> PPHud? {
-        let hud = PPHud.pp_showHudTo(view: self.base, animated: true)
-        hud.mode = .customView
-        
         let customView = UIImageView.init(frame: CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0))
         customView.image = UIImage(named: "pp_success")
-        hud.customView = customView
-        hud.label.text = text
         
+        guard let hud = PPHud.pp_show(text, detail: nil, mode: .customView, customView: customView, actionTitle: text, target: nil, action: nil) else {
+            return nil
+        }
         hud.hide(animated: true, after: 2.0)
         return hud
+    }
+    
+    public func pp_showFail(_ text: String) -> PPHud? {
+        let customView = UIImageView.init(frame: CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0))
+        customView.image = UIImage(named: "pp_fail")
+        
+        guard let hud = PPHud.pp_show(text, detail: nil, mode: .customView, customView: customView, actionTitle: text, target: nil, action: nil) else {
+            return nil
+        }
+        hud.hide(animated: true, after: 2.0)
+        return hud
+    }
+    
+    // MARK: - Base
+    
+    public func showHud() -> PPHud? {
+        return PPHud.pp_showHudTo(view: self.base, animated: true)
     }
 }

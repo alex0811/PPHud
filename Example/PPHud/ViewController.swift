@@ -60,9 +60,13 @@ class ViewController: UIViewController {
 
     // MARK: - Actions
     @objc private func indeterminateModelAction() {
-        guard let hud = PPHud.pp_showHudActivity() else {
+//        guard let hud = PPHud.pp_showHudActivity() else {
+//            return
+//        }
+        guard let hud = self.view.pp.showActivity() else {
             return
         }
+        
         DispatchQueue.global().async {
             // do your work
             DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + 1.0)) {
@@ -72,9 +76,14 @@ class ViewController: UIViewController {
     }
     
     @objc private func indeterminateWithLabelModeAction() {
-        guard let hud = PPHud.pp_showHudActivity("Loading...") else {
+//        guard let hud = PPHud.pp_showHudActivity("Loading...") else {
+//            return
+//        }
+        
+        guard let hud = self.view.pp.showActivity("Loading...") else {
             return
         }
+        
         DispatchQueue.global().async {
             // do your work
             DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + 3.0)) {
@@ -84,9 +93,16 @@ class ViewController: UIViewController {
     }
     
     @objc private func indeterminateWithDetailLabelModeAction() {
-        guard let hude = PPHud.pp_showHudActivity("Loading...", detail: "download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...\n(1/3)") else {
+        let detail = "download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...download images...\n(1/3)"
+        
+//        guard let hude = PPHud.pp_showHudActivity("Loading...", detail: detail) else {
+//            return
+//        }
+        
+        guard let hude = self.view.pp.showActivity(text: "Loading...", detail: detail) else {
             return
         }
+        
         DispatchQueue.global().async {
             // do your work
             DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + 3.0)) {
@@ -97,7 +113,8 @@ class ViewController: UIViewController {
     
     // MARK: -
     @objc private func determinateModeAction() {
-        guard let hud = PPHud.pp_showProgress("Loading...", detail: "step(1/10)") else { return }
+//        guard let hud = PPHud.pp_showProgress("Loading...", detail: "step(1/10)") else { return }
+        guard let hud = self.view.pp.showProgress(text: "Loading...", detail: "step(1/10)", mode: .indeterminate) else { return }
         
         var progress: CGFloat = 0.0
         let timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { (timer) in
@@ -118,9 +135,10 @@ class ViewController: UIViewController {
     }
     
     @objc private func aunularDeterminateModeAction() {
-        guard let hud = PPHud.pp_showProgress("Loading...", detail: nil, mode: .annularDeteminate) else {
-            return
-        }
+//        guard let hud = PPHud.pp_showProgress("Loading...", detail: nil, mode: .annularDeteminate) else {
+//            return
+//        }
+        guard let hud = self.view.pp.showProgress(text: "Loading...", detail: nil, mode: .annularDeteminate) else { return }
         
         var progress: CGFloat = 0.0
         let timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { (timer) in
@@ -140,9 +158,10 @@ class ViewController: UIViewController {
     }
     
     @objc private func barDeterminateModeAction() {
-        guard let hud = PPHud.pp_showProgress("Loading...", detail: "soon", mode: .determinateHorizontalBar) else {
-            return
-        }
+//        guard let hud = PPHud.pp_showProgress("Loading...", detail: "soon", mode: .determinateHorizontalBar) else {
+//            return
+//        }
+        guard let hud = self.view.pp.showProgress(text: "Loading...", detail: nil, mode: .determinateHorizontalBar) else { return }
         
         var progress: CGFloat = 0.0
         let timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { (timer) in
@@ -162,16 +181,23 @@ class ViewController: UIViewController {
     }
     
     @objc private func textOnlyModeAction() {
-        let _ = PPHud.pp_show("Hello Swift")
+//        let _ = PPHud.pp_show("Hello Swift")
+        let _ = self.view.pp.showText("Hello Swift")
     }
     
     @objc private func customViewModeAction() {
-        let _ = PPHud.pp_showSuccess("成功")
+//        let _ = PPHud.pp_showSuccess("成功")
 //        let _ = PPHud.pp_showFail("出错啦！")
+        
+        let _ = self.view.pp.pp_showFail(("失败"))
     }
     
     @objc private func actionButtonModeAction() {
-        guard let hud = PPHud.pp_show("Loading...", detail: nil, mode: .determinateHorizontalBar, customView: nil, actionTitle: "cancel", target: self, action: #selector(ViewController.cancelAction)) else {
+//        guard let hud = PPHud.pp_show("Loading...", detail: nil, mode: .determinateHorizontalBar, customView: nil, actionTitle: "cancel", target: self, action: #selector(ViewController.cancelAction)) else {
+//            return
+//        }
+        
+        guard let hud = self.view.pp.showHudAction(text: "Loading...", mode: .determinateHorizontalBar, actionTile: "cancel", target: self, action: #selector(ViewController.cancelAction)) else {
             return
         }
         
@@ -193,15 +219,20 @@ class ViewController: UIViewController {
     }
     
     @objc private func cancelAction() {
-        if let hud = PPHud.pp_hud() {
-            hud.hide()
-        }
+//        if let hud = PPHud.pp_hud() {
+//            hud.hide()
+//        }
+        
+        self.view.pp.dismissHud()
     }
     
     @objc private func switchingModeAction() {
-        guard let hud = PPHud.pp_showHudActivity() else {
+        guard let hud = self.view.pp.showHud() else {
             return
         }
+//        guard let hud = PPHud.pp_showHudActivity() else {
+//            return
+//        }
         hud.label.text = "prepare..."
         hud.mode = .text
         

@@ -418,9 +418,7 @@ extension PPHud {
         return self.pp_showProgress(text, detail: detail, mode: .determinate)
     }
     
-    public class func pp_showProgress(_ text: String?,
-                                      detail: String?,
-                                        mode: PPHudMode) -> PPHud? {
+    public class func pp_showProgress(_ text: String?, detail: String?, mode: PPHudMode) -> PPHud? {
         return self.pp_show(text, detail: detail, mode: mode, customView: nil, actionTitle: nil, target: nil, action: nil)
     }
     
@@ -464,9 +462,10 @@ extension PPHud {
                          actionTitle: String?,
                               target: Any?,
                               action: Selector?) -> PPHud? {
-        guard let window = UIApplication.shared.delegate?.window else { return nil }
-        
-        let hud = self.pp_showHudTo(view: window, animated: true)
+        guard let window = UIApplication.shared.delegate?.window as? UIView else { return nil }
+        guard let hud = window.pp.showHud() else {
+            return nil
+        }
         hud.mode = mode
         hud.text = text
         hud.detail = detail
