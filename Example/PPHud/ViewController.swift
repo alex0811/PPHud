@@ -171,10 +171,10 @@ class ViewController: UIViewController {
     }
     
     @objc private func actionButtonModeAction() {
-        guard let hud = PPHud.pp_show("Loading...", detail: nil, mode: .determinateHorizontalBar, actionTitle: "cancel", target: self, action: #selector(ViewController.cancelAction)) else {
+        guard let hud = PPHud.pp_show("Loading...", detail: nil, mode: .determinateHorizontalBar, customView: nil, actionTitle: "cancel", target: self, action: #selector(ViewController.cancelAction)) else {
             return
         }
-
+        
         var progress: CGFloat = 0.0
         let timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { (timer) in
             progress += 0.1

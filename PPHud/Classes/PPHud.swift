@@ -411,15 +411,7 @@ extension PPHud {
     }
     
     public class func pp_showHudActivity(_ text: String?, detail: String?) -> PPHud? {
-        guard let window = UIApplication.shared.delegate?.window else {
-            return nil
-        }
-        
-        let hud = self.pp_showHudTo(view: window, animated: true)
-        hud.mode = .indeterminate
-        hud.label.text = text
-        hud.detailLabel.text = detail
-        return hud
+        return PPHud.pp_show(text, detail: detail, mode: .indeterminate, customView: nil, actionTitle: nil, target: nil, action: nil)
     }
     
     public class func pp_showProgress(_ text: String?, detail: String?) -> PPHud? {
@@ -429,66 +421,61 @@ extension PPHud {
     public class func pp_showProgress(_ text: String?,
                                       detail: String?,
                                         mode: PPHudMode) -> PPHud? {
+        return self.pp_show(text, detail: detail, mode: mode, customView: nil, actionTitle: nil, target: nil, action: nil)
+    }
+    
+    public class func pp_show(_ text: String?) -> PPHud? {
+        guard let hud = PPHud.pp_show(text, detail: nil, mode: .text, customView: nil, actionTitle: nil, target: nil, action: nil) else {
+            return nil
+        }
+        
+        hud.hide(animated: true, after: 2.0)
+        return hud
+    }
+    
+    public class func pp_showSuccess(_ text: String?) -> PPHud? {
+        let customView = UIImageView.init(frame: CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0))
+        customView.image = UIImage(named: "pp_success")
+        
+        guard let hud = self.pp_show(text, detail: nil, mode: .customView, customView: customView, actionTitle: nil, target: nil, action: nil) else {
+            return nil
+        }
+        
+        hud.hide(animated: true, after: 2.0)
+        return hud
+    }
+    
+    public class func pp_showFail(_ text: String?) -> PPHud? {
+        let customView = UIImageView.init(frame: CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0))
+        customView.image = UIImage(named: "pp_fail")
+        
+        guard let hud = self.pp_show(text, detail: nil, mode: .customView, customView: customView, actionTitle: nil, target: nil, action: nil) else {
+            return nil
+        }
+        
+        hud.hide(animated: true, after: 2.0)
+        return hud
+    }
+        
+    public class func pp_show(_ text: String?,
+                              detail: String?,
+                                mode: PPHudMode,
+                          customView: UIView?,
+                         actionTitle: String?,
+                              target: Any?,
+                              action: Selector?) -> PPHud? {
         guard let window = UIApplication.shared.delegate?.window else { return nil }
         
         let hud = self.pp_showHudTo(view: window, animated: true)
         hud.mode = mode
         hud.text = text
         hud.detail = detail
-        return hud
-    }
-    
-    public class func pp_show(_ text: String?) -> PPHud? {
-        guard let window = UIApplication.shared.delegate?.window else { return nil }
         
-        let hud = self.pp_showHudTo(view: window, animated: true)
-        hud.mode = .text
-        hud.text = text
-        hud.hide(animated: true, after: 2.0)
-        return hud
-    }
-    
-    public class func pp_showSuccess(_ text: String?) -> PPHud? {
-        guard let window = UIApplication.shared.delegate?.window else { return nil }
-        
-        let hud = PPHud.pp_showHudTo(view: window, animated: true)
-        hud.mode = .customView
-        
-        let customView = UIImageView.init(frame: CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0))
-        customView.image = UIImage(named: "pp_success")
-        hud.customView = customView
-        hud.label.text = text
-        hud.hide(animated: true, after: 2.0)
-        return hud
-    }
-    
-    public class func pp_showFail(_ text: String?) -> PPHud? {
-        guard let window = UIApplication.shared.delegate?.window else { return nil }
-        
-        let hud = PPHud.pp_showHudTo(view: window, animated: true)
-        hud.mode = .customView
-        
-        let customView = UIImageView.init(frame: CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0))
-        customView.image = UIImage(named: "pp_fail")
-        hud.customView = customView
-        hud.label.text = text
-        hud.hide(animated: true, after: 2.0)
-        return hud
-    }
-    
-    
-    
-    public class func pp_show(_ text: String?,
-                              detail: String?,
-                                mode: PPHudMode,
-                         actionTitle: String?,
-                              target: Any?,
-                              action: Selector) -> PPHud? {
-        guard let hud = PPHud.pp_showProgress(text, detail: detail, mode: mode) else {
-            return nil
+        if let customView = customView, mode == .customView {
+            hud.customView = customView
         }
         
-        if let actionTitle = actionTitle, let target = target {
+        if let actionTitle = actionTitle, let target = target, let action = action {
             hud.button.setTitle(actionTitle, for: .normal)
             hud.button.addTarget(target, action: action, for: .touchUpInside)
         }
