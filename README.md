@@ -22,7 +22,7 @@ pod 'PPHud'
 
 ## Author
 
-alex0811, alex_zhangfan@hotmail.com
+alex0811, alex_zhangfan@hotmai
 
 ## License
 
