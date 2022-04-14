@@ -1,3 +1,5 @@
+source 'https://github.com/CocoaPods/Specs.git'# 默认的 GitHub Spec
+
 #use_frameworks!
 
 platform :ios,'10.0'

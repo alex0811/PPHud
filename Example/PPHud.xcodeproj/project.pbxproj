@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11EBF381C367EE1B5712D173 /* libPods-PPHud_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 896DF1A0C1BBB6A92C16BE09 /* libPods-PPHud_Example.a */; };
+		4587CAF82808314B00AC3FA6 /* PPHudWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4587CAF72808314B00AC3FA6 /* PPHudWrapper.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4587CAF72808314B00AC3FA6 /* PPHudWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PPHudWrapper.swift; sourceTree = "<group>"; };
 		4597FEFE3F956170ACA507A8 /* libPods-PPHud_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PPHud_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* PPHud_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PPHud_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				4587CAF72808314B00AC3FA6 /* PPHudWrapper.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -215,10 +218,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = FW7X8GWLK3;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = FW7X8GWLK3;
 						LastSwiftMigration = 1150;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -316,6 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4587CAF82808314B00AC3FA6 /* PPHudWrapper.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
@@ -469,6 +475,7 @@
 			baseConfigurationReference = 73CC9646D0FF0D94ADA14418 /* Pods-PPHud_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = FW7X8GWLK3;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = PPHud/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -490,6 +497,7 @@
 			baseConfigurationReference = 7841D6DD1E29443BD14AF218 /* Pods-PPHud_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = FW7X8GWLK3;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = PPHud/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -510,6 +518,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AFDF3E800D0F1310497A4DE0 /* Pods-PPHud_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = FW7X8GWLK3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -532,6 +541,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E9EF3A74790BF2920F3CCB22 /* Pods-PPHud_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = FW7X8GWLK3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",

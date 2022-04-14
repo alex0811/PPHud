@@ -1,6 +1,0 @@
-module PPHud {
-  umbrella header "PPHud-umbrella.h"
-
-  export *
-  module * { export * }
-}

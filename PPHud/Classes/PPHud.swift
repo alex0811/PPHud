@@ -462,23 +462,22 @@ extension PPHud {
                          actionTitle: String?,
                               target: Any?,
                               action: Selector?) -> PPHud? {
-        guard let window = UIApplication.shared.delegate?.window as? UIView else { return nil }
-        guard let hud = window.pp.showHud() else {
-            return nil
-        }
+        guard let window = UIApplication.shared.delegate?.window else { return nil }
+        let hud = PPHud.pp_showHudTo(view: window, animated: true)
+        
         hud.mode = mode
         hud.text = text
         hud.detail = detail
-        
+
         if let customView = customView, mode == .customView {
             hud.customView = customView
         }
-        
+
         if let actionTitle = actionTitle, let target = target, let action = action {
             hud.button.setTitle(actionTitle, for: .normal)
             hud.button.addTarget(target, action: action, for: .touchUpInside)
         }
-        
+
         return hud
     }
     

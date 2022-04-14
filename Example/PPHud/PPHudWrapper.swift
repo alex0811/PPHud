@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import PPHud
 
 public final class PPHudWrapper<Base> {
     public let base: Base
@@ -96,7 +97,7 @@ extension PPHudWrapper where Base == UIView {
         let hud = PPHud.pp_showHudTo(view: self.base, animated: true)
         hud.mode = .text
         hud.label.text = text
-        if autoHide { hud.hide(animated: true, after: 2.0) }
+        if autoHide { hud.hide(animated: true, after: 1.0) }
         return hud
     }
     
