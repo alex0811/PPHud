@@ -143,6 +143,7 @@ public class PPHud: UIView {
     private func commonInit() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.enbaleBackgroundGesture = false
+        self.contentColor = self.isDarkMode() ? .white : .black
         self.setupViews()
         self.updateIndicators()
     }
@@ -406,7 +407,7 @@ extension PPHud {
         return self.pp_showHudActivity(nil)
     }
     
-    public class func pp_showHudActivity(_ text: String?) -> PPHud? {
+    @discardableResult @objc public class func pp_showHudActivity(_ text: String?) -> PPHud? {
         return self.pp_showHudActivity(text, detail: nil)
     }
     
@@ -422,7 +423,7 @@ extension PPHud {
         return self.pp_show(text, detail: detail, mode: mode, customView: nil, actionTitle: nil, target: nil, action: nil)
     }
     
-    public class func pp_show(_ text: String?) -> PPHud? {
+    @discardableResult @objc public class func pp_show(_ text: String?) -> PPHud? {
         guard let hud = PPHud.pp_show(text, detail: nil, mode: .text, customView: nil, actionTitle: nil, target: nil, action: nil) else {
             return nil
         }
@@ -462,27 +463,26 @@ extension PPHud {
                          actionTitle: String?,
                               target: Any?,
                               action: Selector?) -> PPHud? {
-        guard let window = UIApplication.shared.delegate?.window else { return nil }
+        guard let window = UIApplication.shared.delegate?.window as? UIView else { return nil }
         let hud = PPHud.pp_showHudTo(view: window, animated: true)
-        
         hud.mode = mode
         hud.text = text
         hud.detail = detail
-
+        
         if let customView = customView, mode == .customView {
             hud.customView = customView
         }
-
+        
         if let actionTitle = actionTitle, let target = target, let action = action {
             hud.button.setTitle(actionTitle, for: .normal)
             hud.button.addTarget(target, action: action, for: .touchUpInside)
         }
-
+        
         return hud
     }
     
     // MARK: Base
-    public class func pp_showHudTo(view: UIView!, animated: Bool) -> PPHud{
+    public class func pp_showHudTo(view: UIView!, animated: Bool) -> PPHud {
         let hud = PPHud()
         view.addSubview(hud)
         hud.showUsingAnimation(animated)
@@ -490,7 +490,7 @@ extension PPHud {
     }
     
     // MARK: Hide
-    public func hide() {
+    @objc public func hide() {
         self.hide(animated: true)
     }
     
@@ -527,6 +527,18 @@ extension PPHud {
         }
         
         return result
+    }
+    
+    // MARK: - Private
+    
+    /// 判断是否深色模式
+    /// - Returns: 是否深色模式
+    private func isDarkMode() -> Bool {
+        if #available(iOS 13.0, *) {
+            return UITraitCollection.current.userInterfaceStyle == .dark
+        } else {
+            return false
+        }
     }
 }
 
