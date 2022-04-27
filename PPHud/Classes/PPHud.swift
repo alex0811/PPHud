@@ -408,11 +408,15 @@ extension PPHud {
     }
     
     @discardableResult @objc public class func pp_showHudActivity(_ text: String?) -> PPHud? {
-        return self.pp_showHudActivity(text, detail: nil)
+        return self.pp_showHudActivity(text, detail: nil, toView: nil)
     }
     
-    public class func pp_showHudActivity(_ text: String?, detail: String?) -> PPHud? {
-        return PPHud.pp_show(text, detail: detail, mode: .indeterminate, customView: nil, actionTitle: nil, target: nil, action: nil)
+    @discardableResult @objc public class func pp_showHudActivity(_ text: String?, to view: UIView?) -> PPHud? {
+        return self.pp_showHudActivity(text, detail: nil, toView: view)
+    }
+    
+    public class func pp_showHudActivity(_ text: String?, detail: String?, toView: UIView?) -> PPHud? {
+        return PPHud.pp_show(text, detail: detail, mode: .indeterminate, customView: nil, toView: toView, actionTitle: nil, target: nil, action: nil)
     }
     
     public class func pp_showProgress(_ text: String?, detail: String?) -> PPHud? {
@@ -424,7 +428,16 @@ extension PPHud {
     }
     
     @discardableResult @objc public class func pp_show(_ text: String?) -> PPHud? {
-        guard let hud = PPHud.pp_show(text, detail: nil, mode: .text, customView: nil, actionTitle: nil, target: nil, action: nil) else {
+        guard let hud = PPHud.pp_show(text, to: nil) else {
+            return nil
+        }
+        
+        hud.hide(animated: true, after: 2.0)
+        return hud
+    }
+    
+    @discardableResult @objc public class func pp_show(_ text: String?, to view: UIView?) -> PPHud? {
+        guard let hud = PPHud.pp_show(text, detail: nil, mode: .text, customView: nil, toView: view, actionTitle: nil, target: nil, action: nil) else {
             return nil
         }
         
@@ -455,7 +468,7 @@ extension PPHud {
         hud.hide(animated: true, after: 2.0)
         return hud
     }
-        
+      
     public class func pp_show(_ text: String?,
                               detail: String?,
                                 mode: PPHudMode,
@@ -463,8 +476,26 @@ extension PPHud {
                          actionTitle: String?,
                               target: Any?,
                               action: Selector?) -> PPHud? {
+        return self.pp_show(text,
+                            detail: detail,
+                            mode: mode,
+                            customView: customView,
+                            toView: nil,
+                            actionTitle: actionTitle,
+                            target: target,
+                            action: action)
+    }
+    
+    public class func pp_show(_ text: String?,
+                              detail: String?,
+                                mode: PPHudMode,
+                          customView: UIView?,
+                              toView: UIView?,
+                         actionTitle: String?,
+                              target: Any?,
+                              action: Selector?) -> PPHud? {
         guard let window = UIApplication.shared.delegate?.window as? UIView else { return nil }
-        let hud = PPHud.pp_showHudTo(view: window, animated: true)
+        let hud = PPHud.pp_showHudTo(view: toView ?? window, animated: true)
         hud.mode = mode
         hud.text = text
         hud.detail = detail
