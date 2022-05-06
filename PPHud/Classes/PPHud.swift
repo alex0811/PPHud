@@ -663,7 +663,6 @@ public class PPBackgroundView: UIView {
         if self.style == .blur {
             self.backgroundColor = self.color
         } else {
-            // TODO: @alex
             self.backgroundColor = self.color
         }
     }
