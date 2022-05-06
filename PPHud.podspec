@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'PPHud'
-  s.version          = '0.1.4'
+  s.version          = '0.1.5'
   s.summary          = 'A simple Hud'
   s.homepage         = 'https://github.com/alex0811/PPHud'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
