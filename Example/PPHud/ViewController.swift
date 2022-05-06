@@ -244,7 +244,7 @@ class ViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 6.0) {
             hud.mode = .text
             hud.label.text = "done!"
-            hud.hide(animated: true, after: 1.0)
+            hud.hide(animated: true)
         }
     }
     
@@ -255,7 +255,7 @@ class ViewController: UIViewController {
         }
         
         hud.animateMode = .zoomIn
-        hud.hide(animated: true, after: 2.0)
+        hud.hide(animated: true)
     }
     
     @objc private func dimBackgrounAction() {
@@ -264,7 +264,7 @@ class ViewController: UIViewController {
         }
         
         hud.animateMode = .zoomIn
-        hud.hide(animated: true, after: 2.0)
+        hud.hide(animated: true)
     }
     
     @objc private func doBackgrounAction() {
@@ -274,7 +274,7 @@ class ViewController: UIViewController {
         
         hud.enbaleBackgroundGesture = true
         hud.animateMode = .zoomIn
-        hud.hide(animated: true, after: 2.0)
+        hud.hide(animated: true)
     }
     
     @objc private func colordAction() {
@@ -284,7 +284,7 @@ class ViewController: UIViewController {
         
         hud.text = "Loading..."
         hud.contentColor = .purple
-        hud.hide(animated: true, after: 2.0)
+        hud.hide(animated: true)
     }
     
     // MARK: -
@@ -292,7 +292,7 @@ class ViewController: UIViewController {
         let hud = PPHud.pp_showHudTo(view: self.tableView, animated: true)
         hud.mode = .indeterminate
         hud.backgroundView.color = UIColor.init(white: 0.0, alpha: 0.1)
-        hud.hide(animated: true, after: 2.0)
+        hud.hide(animated: true)
         hud.enbaleBackgroundGesture = true
     }
 }

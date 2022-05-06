@@ -22,6 +22,7 @@ public enum PPHudAnimateMode {
     case zoom       /// appear out, dispear in
     case zoomOut    /// apear out, dispear out
     case zoomIn     /// apear in, disapear in
+    case fadeInZoomOut /// appear fade, disapear zoom in
 }
 
 public class PPHud: UIView {
@@ -40,7 +41,7 @@ public class PPHud: UIView {
     public var backgroundView: PPBackgroundView = PPBackgroundView()
     var bezelView: PPBackgroundView = PPBackgroundView()
     var isShowing: Bool = false
-    public var animateMode: PPHudAnimateMode = .fade
+    public var animateMode: PPHudAnimateMode = .fadeInZoomOut
     var bezelConstraints = [NSLayoutConstraint]()
     
     public var contentColor: UIColor = UIColor.black {
@@ -349,9 +350,9 @@ public class PPHud: UIView {
             self.bezelView.transform = apear ? small : .identity
             UIView.animate(withDuration: 0.2, animations: {
                 self.bezelView.transform = apear ? .identity : small
-                self.bezelView.alpha = apear ? 1.0 : 0.0
             }) { isFinish in
                 if isFinish {
+                    self.bezelView.alpha = apear ? 1.0 : 0.0
                     if let complete = complete { complete() }
                 }
             }
@@ -377,15 +378,22 @@ public class PPHud: UIView {
                     if let complete = complete { complete() }
                 }
             }
-        } else {
-            self.bezelView.alpha = apear ? 0.0 : 1.0
-            UIView.animate(withDuration: animationInterval, animations: {
-                self.bezelView.alpha = apear ? 1.0 : 0.0
-            }) { isFinish in
-                if isFinish {
-                    if let complete = complete { complete() }
+        } else if self.animateMode == .fadeInZoomOut {
+            if apear {
+                self.bezelView.alpha = 1.0
+                self.bezelView.transform = .identity
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.bezelView.transform = small
+                    self.bezelView.alpha = 0.2
+                }) { isFinish in
+                    self.bezelView.alpha = 0.0
+                    complete?()
                 }
             }
+        } else {
+            self.bezelView.alpha = apear ? 1.0 : 0.0
+            complete?()
         }
     }
     
@@ -432,7 +440,7 @@ extension PPHud {
             return nil
         }
         
-        hud.hide(animated: true, after: 2.0)
+        hud.hide(animated: true)
         return hud
     }
     
@@ -440,8 +448,8 @@ extension PPHud {
         guard let hud = PPHud.pp_show(text, detail: nil, mode: .text, customView: nil, toView: view, actionTitle: nil, target: nil, action: nil) else {
             return nil
         }
-        
-        hud.hide(animated: true, after: 2.0)
+
+        hud.hide(animated: true)
         return hud
     }
     
@@ -453,7 +461,7 @@ extension PPHud {
             return nil
         }
         
-        hud.hide(animated: true, after: 2.0)
+        hud.hide(animated: true)
         return hud
     }
     
@@ -465,7 +473,7 @@ extension PPHud {
             return nil
         }
         
-        hud.hide(animated: true, after: 2.0)
+        hud.hide(animated: true)
         return hud
     }
       
@@ -531,11 +539,7 @@ extension PPHud {
             return
         }
         
-        self.hideUsingAnimation(animated)
-    }
-    
-    public func hide(animated: Bool, after: Double) {
-        DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + after)) {
+        DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + 1.0)) {
             self.hideUsingAnimation(animated)
         }
     }
