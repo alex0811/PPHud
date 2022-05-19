@@ -169,6 +169,8 @@ public class PPHud: UIView {
         self.label.font = UIFont.boldSystemFont(ofSize: PPDefaultLabelFontSize)
         self.label.backgroundColor = .clear
         self.label.translatesAutoresizingMaskIntoConstraints = false
+        self.label.numberOfLines = 0
+        self.label.lineBreakMode = .byCharWrapping
         self.bezelView.addSubview(self.label)
 
         self.detailLabel.isOpaque = false
@@ -440,7 +442,9 @@ extension PPHud {
             return nil
         }
         
-        hud.hide(animated: true)
+        DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + 1.0)) {
+            hud.hide(animated: true)
+        }
         return hud
     }
     
@@ -449,7 +453,9 @@ extension PPHud {
             return nil
         }
 
-        hud.hide(animated: true)
+        DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + 1.0)) {
+            hud.hide(animated: true)
+        }
         return hud
     }
     
@@ -461,7 +467,9 @@ extension PPHud {
             return nil
         }
         
-        hud.hide(animated: true)
+        DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + 1.0)) {
+            hud.hide(animated: true)
+        }
         return hud
     }
     
@@ -473,7 +481,9 @@ extension PPHud {
             return nil
         }
         
-        hud.hide(animated: true)
+        DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + 1.0)) {
+            hud.hide(animated: true)
+        }
         return hud
     }
       
@@ -539,9 +549,7 @@ extension PPHud {
             return
         }
         
-        DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + 1.0)) {
-            self.hideUsingAnimation(animated)
-        }
+        self.hideUsingAnimation(animated)
     }
     
     public class func pp_hud() -> PPHud? {
